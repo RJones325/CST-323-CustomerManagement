@@ -26,42 +26,84 @@ public class CustomerController {
 
     @GetMapping("/")
     public String showHomePage() {
-        logger.info("Opening home page");
-        return "index";
+        logger.info("CustomerController - showHomePage - Enter");
+
+        try {
+            logger.info("CustomerController - showHomePage - Exit");
+            return "index";
+        } catch (Exception e) {
+            logger.error("CustomerController - showHomePage - Error: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/customers")
     public String showCustomerList(Model model) {
-        logger.info("Loading customer list");
-        model.addAttribute("customers", customerService.getAllCustomers());
-        return "customers";
+        logger.info("CustomerController - showCustomerList - Enter");
+
+        try {
+            model.addAttribute("customers", customerService.getAllCustomers());
+            logger.info("CustomerController - showCustomerList - Exit");
+            return "customers";
+        } catch (Exception e) {
+            logger.error("CustomerController - showCustomerList - Error: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/customers/new")
     public String showAddCustomerForm(Model model) {
-        logger.info("Opening add customer form");
-        model.addAttribute("customer", new Customer());
-        return "customer-form";
+        logger.info("CustomerController - showAddCustomerForm - Enter");
+
+        try {
+            model.addAttribute("customer", new Customer());
+            logger.info("CustomerController - showAddCustomerForm - Exit");
+            return "customer-form";
+        } catch (Exception e) {
+            logger.error("CustomerController - showAddCustomerForm - Error: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping("/customers/save")
     public String saveCustomer(@ModelAttribute Customer customer) {
-        logger.info("Saving customer");
-        customerService.saveCustomer(customer);
-        return "redirect:/customers";
+        logger.info("CustomerController - saveCustomer - Enter");
+
+        try {
+            customerService.saveCustomer(customer);
+            logger.info("CustomerController - saveCustomer - Exit");
+            return "redirect:/customers";
+        } catch (Exception e) {
+            logger.error("CustomerController - saveCustomer - Error: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/customers/edit/{id}")
     public String showEditCustomerForm(@PathVariable Long id, Model model) {
-        logger.info("Opening edit form for customer ID: {}", id);
-        model.addAttribute("customer", customerService.getCustomerById(id));
-        return "customer-form";
+        logger.info("CustomerController - showEditCustomerForm - Enter");
+
+        try {
+            model.addAttribute("customer", customerService.getCustomerById(id));
+            logger.info("CustomerController - showEditCustomerForm - Exit");
+            return "customer-form";
+        } catch (Exception e) {
+            logger.error("CustomerController - showEditCustomerForm - Error: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/customers/delete/{id}")
     public String deleteCustomer(@PathVariable Long id) {
-        logger.info("Deleting customer ID: {}", id);
-        customerService.deleteCustomer(id);
-        return "redirect:/customers";
+        logger.info("CustomerController - deleteCustomer - Enter");
+
+        try {
+            customerService.deleteCustomer(id);
+            logger.info("CustomerController - deleteCustomer - Exit");
+            return "redirect:/customers";
+        } catch (Exception e) {
+            logger.error("CustomerController - deleteCustomer - Error: {}", e.getMessage());
+            throw e;
+        }
     }
 }
