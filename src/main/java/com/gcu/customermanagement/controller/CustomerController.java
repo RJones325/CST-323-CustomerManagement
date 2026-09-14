@@ -102,7 +102,7 @@ public class CustomerController {
             logger.info("CustomerController - deleteCustomer - Exit");
             return "redirect:/customers";
         } catch (Exception e) {
-            logger.error("CustomerController - deleteCustomer - Error: {}", e.getMessage());
+          logger.error("CustomerController - deleteCustomer - Error: {}", e.getMessage());
             throw e;
         }
     }
